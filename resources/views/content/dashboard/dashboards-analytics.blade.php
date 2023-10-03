@@ -78,31 +78,70 @@
                   <div class="user-progress">
                       <small class="fw-semibold">{{ $service->average_rating }}</small>
                       <div class="btn-group">
-                        <a href="{{ route('services.edit', $service->id) }}" class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></a>
-                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $service->id }}"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#editModal-{{ $service->id }}"><i class="fas fa-trash-alt"></i></button>
+                        <form action="{{ route('service.destroy', $service->id) }}" method="POST">
+                          @csrf
+                          @method('DELETE')
+                          <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
+                      </form>
+
                     </div>                
                   </div>
-                  <div class="modal fade" id="deleteModal-{{ $service->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                Are you sure you want to delete this service?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <form action="{{ route('services.destroy', $service->id) }}" >
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+                  @endforeach
+                  @foreach ($services as $service)
+
+                  <div class="modal fade" id="editModal-{{ $service->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true"> 
+                    <div class="card mb-4">
+                          <div class="card-header d-flex justify-content-between align-items-center">
+                              <h5 class="mb-0">Add a new Service</h5>
+                              <small class="text-muted float-end">Merged input group</small>
+                          </div>
+                           <div class="card-body">
+                              <form method="POST" action="{{ route('services.store') }}">
+                                  @csrf
+                  
+                                  <div class="mb-3">
+                                      <label class="form-label" for="title">Title</label>
+                                      <input type="text" class="form-control" id="title" name="title" placeholder="Service Title" required />
+                                  </div>
+                  
+                                  <div class="mb-3">
+                                      <label class="form-label" for="description">Description</label>
+                                      <textarea class="form-control" id="description" name="description" placeholder="Service Description" required></textarea>
+                                  </div>
+                  
+                                  <div class="mb-3">
+                                      <label class="form-label" for="price">Price</label>
+                                      <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="Service Price" required />
+                                  </div>
+                  
+                                  <div class="mb-3">
+                                      <label class="form-label" for="delivery_time">Delivery Time (in days)</label>
+                                      <input type="number" class="form-control" id="delivery_time" name="delivery_time" placeholder="Delivery Time" required />
+                                  </div>
+                  
+                                  <div class="mb-3">
+                                      <label class="form-label" for="category_id">Category</label>
+                                      <select class="form-select" id="category_id" name="category_id" required>
+                                          <option value="">Select a category</option>
+                                          @foreach ($categories as $category)
+                                              <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                          @endforeach
+                                      </select>
+                                  </div>
+                  
+                                  <input type="hidden" name="user_id" value="15" />
+                  
+                                  <button type="submit" class="btn btn-primary">Create Service</button>
+                              </form>
+                          </div> 
+                      </div>
                 </div>
+                @endforeach
+
+                @foreach ($services as $service)
+<div class="modal fade" id="deleteModal-{{ $service->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  
               </div>
           </li>
           @endforeach
@@ -273,34 +312,31 @@
   <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
     <div class="card mb-4">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">{{ isset($service) ? 'Edit Service' : 'Add a new Service' }}</h5>
+            <h5 class="mb-0">Add a new Service</h5>
             <small class="text-muted float-end">Merged input group</small>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ isset($service) ? route('services.update', $service->id) : route('services.store') }}">
+            <form method="POST" action="{{ route('services.store') }}">
                 @csrf
-                @if(isset($service))
-                    @method('PUT')
-                @endif
 
                 <div class="mb-3">
-                    <label class="form-label" for="title">{{$service->title}}</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Service Title" required value="{{ isset($service) ? $service->title : old('title') }}" />
+                    <label class="form-label" for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Service Title" required />
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description" placeholder="Service Description" required>{{ isset($service) ? $service->description : old('description') }}</textarea>
+                    <textarea class="form-control" id="description" name="description" placeholder="Service Description" required></textarea>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="price">Price</label>
-                    <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="Service Price" required value="{{ isset($service) ? $service->price : old('price') }}" />
+                    <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="Service Price" required />
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label" for="delivery_time">Delivery Time (in days)</label>
-                    <input type="number" class="form-control" id="delivery_time" name="delivery_time" placeholder="Delivery Time" required value="{{ isset($service) ? $service->delivery_time : old('delivery_time') }}" />
+                    <input type="number" class="form-control" id="delivery_time" name="delivery_time" placeholder="Delivery Time" required />
                 </div>
 
                 <div class="mb-3">
@@ -308,14 +344,14 @@
                     <select class="form-select" id="category_id" name="category_id" required>
                         <option value="">Select a category</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" {{ isset($service) && $service->category_id == $category->id ? 'selected' : '' }}>{{ $category->category_name }}</option>
+                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <input type="hidden" name="user_id" value="15" />
 
-                <button type="submit" class="btn btn-primary">{{ isset($service) ? 'Update Service' : 'Create Service' }}</button>
+                <button type="submit" class="btn btn-primary">Create Service</button>
             </form>
         </div>
     </div>

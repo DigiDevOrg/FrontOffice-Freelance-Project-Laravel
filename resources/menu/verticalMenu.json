@@ -47,11 +47,10 @@
     {
       "name": "Services",
       "icon": "menu-icon tf-icons bx bx-collection",
-      "slug": "Services",
-      "url": "/Services",
+      "slug": "services",
       "submenu": [
         {
-          "url": "/Services",
+          "url": "/services",
           "name": "Show All",
           "slug": "Services"
         },

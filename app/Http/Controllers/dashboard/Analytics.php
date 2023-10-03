@@ -11,12 +11,20 @@ class Analytics extends Controller
 {
   public function index($id)
   {
+    $services1 = Service::all();
+
     $categories = Categorie::all();
     $services = Service::where('user_id', $id)->get();
     foreach ($services as $service) {
-      $service->user_name = $service->user->name;
+      $name = $service->user->name;
     }
-    return view('content.dashboard.dashboards-analytics', compact('services','categories'));
+    //if name == Undefined variable 
+    if(!isset($name)){
+      return view('content.Services.services-basic', compact('services1'));
+    }else{
+      return view('content.dashboard.dashboards-analytics', compact('services','categories','name'));
+
+    }
     
   }
 public function create($id = 15) {
@@ -59,10 +67,9 @@ public function create($id = 15) {
           {
               $service = Service::findOrFail($id);
               $service->delete();
-
+              
               return redirect()->route('dashboard-analytics', ['id' => 15]);
           }
-
       public function edit($id)
       {
           $services = Service::where('user_id', 15)->get();

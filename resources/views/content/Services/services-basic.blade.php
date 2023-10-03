@@ -11,7 +11,7 @@
 
 <!-- Examples -->
 <div class="row mb-5">
-  @foreach($services as $service)
+  @foreach($services1 as $service)
   <div class="col-md-6 col-lg-4 mb-3">
     <div class="card h-100">
       <!-- Replace 'img/src' and 'card-title' and 'card-text' with actual fields from your Service model -->
@@ -19,9 +19,9 @@
       <div class="card-body">
         <h5 class="card-title">{{ $service->title }}</h5>
         <p class="card-text">{{ $service->description }}</p>
-        <p class="card-text">{{ $service->description }}</p>
-        <p class="card-text">{{ $service->description }}</p>
-        <p class="card-text">{{ $service->description }}</p>
+        <p class="card-text">{{ $service->price }}</p>
+        <p class="card-text">{{ $service->average_rating }}</p>
+        <p class="card-text">{{ $service->user_name }}</p>
         <a href="javascript:void(0)" class="btn btn-outline-primary">Learn More</a>
       </div>
     </div>

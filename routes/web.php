@@ -38,14 +38,14 @@ Route::get('/auth/register-basic', $controller_path . '\authentications\Register
 Route::get('/auth/forgot-password-basic', $controller_path . '\authentications\ForgotPasswordBasic@index')->name('auth-reset-password-basic');
 
 // services
-Route::get('/Services', $controller_path . '\services\Services@index')->name('Services');
+Route::get('/services', $controller_path . '\services\Services@index')->name('services');
 Route::get('/Services/{idCategorie}', $controller_path . '\services\Services@getServiceByIdCategorie')->name('Services-categorie');
 Route::post('/addService', $controller_path . '\dashboard\Analytics@store')->name('services.store');
 Route::get('/categories/{id?}', $controller_path . '\dashboard\Analytics@create')->name('categories.create');
-Route::get('/edit/{id}', $controller_path . '\dashboard\Analytics@edit')->name('services.edit');
+Route::get('/edit/{id}', $controller_path . '\dashboard\Analytics@edit')->name('service.edit');
 
-Route::put('/update/{id}', $controller_path . '\dashboard\Analytics@update')->name('services.update');
-Route::delete('/services/{id}', '\dashboard\Analytics@destroy')->name('services.destroy');
+Route::put('/update/{id}', $controller_path . '\dashboard\Analytics@update')->name('service.update');
+Route::delete('/delete/services/{id}', $controller_path . '\dashboard\Analytics@destroy')->name('service.destroy');
 
 // User Interface
 Route::get('/ui/accordion', $controller_path . '\user_interface\Accordion@index')->name('ui-accordion');
