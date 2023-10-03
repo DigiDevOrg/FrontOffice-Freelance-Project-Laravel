@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 $controller_path = 'App\Http\Controllers';
 
 // Main Page Route
-Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics');
+Route::get('/{id}', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics');
 
 // layout
 Route::get('/layouts/without-menu', $controller_path . '\layouts\WithoutMenu@index')->name('layouts-without-menu');
@@ -37,8 +37,15 @@ Route::get('/auth/login-basic', $controller_path . '\authentications\LoginBasic@
 Route::get('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@index')->name('auth-register-basic');
 Route::get('/auth/forgot-password-basic', $controller_path . '\authentications\ForgotPasswordBasic@index')->name('auth-reset-password-basic');
 
-// cards
+// services
 Route::get('/Services', $controller_path . '\services\Services@index')->name('Services');
+Route::get('/Services/{idCategorie}', $controller_path . '\services\Services@getServiceByIdCategorie')->name('Services-categorie');
+Route::post('/addService', $controller_path . '\dashboard\Analytics@store')->name('services.store');
+Route::get('/categories/{id?}', $controller_path . '\dashboard\Analytics@create')->name('categories.create');
+Route::get('/edit/{id}', $controller_path . '\dashboard\Analytics@edit')->name('services.edit');
+
+Route::put('/update/{id}', $controller_path . '\dashboard\Analytics@update')->name('services.update');
+Route::delete('/services/{id}', '\dashboard\Analytics@destroy')->name('services.destroy');
 
 // User Interface
 Route::get('/ui/accordion', $controller_path . '\user_interface\Accordion@index')->name('ui-accordion');

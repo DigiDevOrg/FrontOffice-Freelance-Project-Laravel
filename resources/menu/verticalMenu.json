@@ -1,7 +1,7 @@
 {
   "menu": [
     {
-      "url": "/",
+      "url": "/15",
       "name": "Dashboard",
       "icon": "menu-icon tf-icons bx bx-home-circle",
       "slug": "dashboard-analytics"
@@ -39,21 +39,7 @@
     {
       "name": "Notification",
       "icon": "menu-icon tf-icons bx bx-cube-alt",
-      "slug": "pages-misc",
-      "submenu": [
-        {
-          "url": "/pages/misc-error",
-          "name": "Categorie 1",
-          "slug": "pages-misc-error",
-          "target": "_blank"
-        },
-        {
-          "url": "/pages/misc-under-maintenance",
-          "name": "Categorie 2",
-          "slug": "pages-misc-under-maintenance",
-          "target": "_blank"
-        }
-      ]
+      "slug": "pages-misc"
     },
     {
       "menuHeader": "Navigations"
@@ -65,16 +51,29 @@
       "url": "/Services",
       "submenu": [
         {
-          "url": "/pages/misc-error",
-          "name": "Error",
-          "slug": "pages-misc-error",
-          "target": "_blank"
+          "url": "/Services",
+          "name": "Show All",
+          "slug": "Services"
         },
         {
-          "url": "/pages/misc-under-maintenance",
-          "name": "Under Maintenance",
-          "slug": "pages-misc-under-maintenance",
-          "target": "_blank"
+          "url": "/Services/3",
+          "name": "Test",
+          "slug": "pages-misc-error"
+                },
+        {
+          "url": "/Services/4",
+          "name": "Hello",
+          "slug": "pages-misc-under-maintenance"
+        },
+        {
+          "url": "/pages/misc-error",
+          "name": "Categorie 3",
+          "slug": "pages-misc-error"
+                },
+        {
+          "url": "/pages/misc-error",
+          "name": "Categorie 4",
+          "slug": "pages-misc-under-maintenance"
         }
       ]
     }
