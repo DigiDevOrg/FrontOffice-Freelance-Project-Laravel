@@ -5,7 +5,7 @@
 $contentNavbar = true;
 $containerNav = ($containerNav ?? 'container-xxl');
 $isNavbar = ($isNavbar ?? true);
-$isMenu = ($isMenu ?? true);
+$isMenu = ($isMenu ?? false);
 $isFlex = ($isFlex ?? false);
 $isFooter = ($isFooter ?? true);
 $customizerHidden = ($customizerHidden ?? '');
