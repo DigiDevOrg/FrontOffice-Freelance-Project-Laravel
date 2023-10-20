@@ -37,326 +37,34 @@
       </div>
     </div>
   </div>
-  
-  <div class="col-12 col-md-8 col-lg-4 order-3 order-md-2 ">
-    <div class="card h-100">
-      <div class="card-header d-flex align-items-center justify-content-between pb-0">
-        <div class="card-title mb-0">
-          <h5 class="m-0 me-2">Order Statistics</h5>
-          <small class="text-muted">42.82k Total Sales</small>
-        </div>
-        <div class="dropdown">
-          <button class="btn p-0" type="button" id="orederStatistics" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="bx bx-dots-vertical-rounded"></i>
-          </button>
-          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
-            <a class="dropdown-item" href="javascript:void(0);">Select All</a>
-            <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-            <a class="dropdown-item" href="javascript:void(0);">Share</a>
-          </div>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <div class="d-flex flex-column align-items-center gap-1">
-                <h2 class="mb-2">8,258</h2>
-                <span>Total Orders</span>
-            </div>
-            <div id="orderStatisticsChart"></div>
-        </div>
-        <ul class="p-0 m-0">
-          @foreach ($services as $service)
-          <li class="d-flex mb-4 pb-1">
-              <div class="avatar flex-shrink-0 me-3">
-                  <span class="avatar-initial rounded bg-label-primary"><i class='bx bx-mobile-alt'></i></span>
-              </div>
-              <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                  <div class="me-2">
-                      <h6 class="mb-0">{{ $service->title }}</h6>
-                      <small class="text-muted">{{ $service->description }}</small>
-                  </div>
-                  <div class="user-progress">
-                      <small class="fw-semibold">{{ $service->average_rating }}</small>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#editModal-{{ $service->id }}"><i class="fas fa-trash-alt"></i></button>
-                        <form action="{{ route('service.destroy', $service->id) }}" method="POST">
-                          @csrf
-                          @method('DELETE')
-                          <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></button>
-                      </form>
+  <div class="row">
+    @php
+    $classNames = ['bg-warning', 'bg-danger', 'bg-success', 'bg-info', 'bg-primary', 'bg-secondary'];
+    shuffle($classNames);
+    $classNamesCount = count($classNames);
+    @endphp
 
-                    </div>                
-                  </div>
-                  @endforeach
-                  @foreach ($services as $service)
+    @foreach ($categories as $category)
+    @php
+    $cssClass = $classNames[array_rand($classNames)]; 
+    @endphp
 
-                  <div class="modal fade" id="editModal-{{ $service->id }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true"> 
-                    <div class="card mb-4">
-                          <div class="card-header d-flex justify-content-between align-items-center">
-                              <h5 class="mb-0">Add a new Service</h5>
-                              <small class="text-muted float-end">Merged input group</small>
-                          </div>
-                           <div class="card-body">
-                              <form method="POST" action="{{ route('services.store') }}">
-                                  @csrf
-                  
-                                  <div class="mb-3">
-                                      <label class="form-label" for="title">Title</label>
-                                      <input type="text" class="form-control" id="title" name="title" placeholder="Service Title" required />
-                                  </div>
-                  
-                                  <div class="mb-3">
-                                      <label class="form-label" for="description">Description</label>
-                                      <textarea class="form-control" id="description" name="description" placeholder="Service Description" required></textarea>
-                                  </div>
-                  
-                                  <div class="mb-3">
-                                      <label class="form-label" for="price">Price</label>
-                                      <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="Service Price" required />
-                                  </div>
-                  
-                                  <div class="mb-3">
-                                      <label class="form-label" for="delivery_time">Delivery Time (in days)</label>
-                                      <input type="number" class="form-control" id="delivery_time" name="delivery_time" placeholder="Delivery Time" required />
-                                  </div>
-                  
-                                  <div class="mb-3">
-                                      <label class="form-label" for="category_id">Category</label>
-                                      <select class="form-select" id="category_id" name="category_id" required>
-                                          <option value="">Select a category</option>
-                                          @foreach ($categories as $category)
-                                              <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                                          @endforeach
-                                      </select>
-                                  </div>
-                  
-                                  <input type="hidden" name="user_id" value="15" />
-                  
-                                  <button type="submit" class="btn btn-primary">Create Service</button>
-                              </form>
-                          </div> 
-                      </div>
+    <div class="col-md-6 col-xl-4">
+        <div class="card {{ $cssClass }} text-white mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div>
+                    <h5 class="card-title" style="color : white;"><a href="" style="color : white;">{{ $category->name }}</a></h5>
                 </div>
-                @endforeach
-
-                @foreach ($services as $service)
-<div class="modal fade" id="deleteModal-{{ $service->id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  
-              </div>
-          </li>
-          @endforeach
-      </ul>
-      
-    </div>
-    
-    </div>
-  </div>
-  <!--/ Total Revenue -->
-  <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-    <div class="row">
-      <div class="col-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="card-title d-flex align-items-start justify-content-between">
-              <div class="avatar flex-shrink-0">
-                <img src="{{asset('assets/img/icons/unicons/paypal.png')}}" alt="Credit Card" class="rounded">
-              </div>
-              <div class="dropdown">
-                <button class="btn p-0" type="button" id="cardOpt4" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="bx bx-dots-vertical-rounded"></i>
-                </button>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
-                  <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                  <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                </div>
-              </div>
+                
             </div>
-            <span class="d-block mb-1">Payments</span>
-            <h3 class="card-title text-nowrap mb-2">$2,456</h3>
-            <small class="text-danger fw-semibold"><i class='bx bx-down-arrow-alt'></i> -14.82%</small>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 mb-4">
-        <div class="card">
-          <div class="card-body">
-            <div class="card-title d-flex align-items-start justify-content-between">
-              <div class="avatar flex-shrink-0">
-                <img src="{{asset('assets/img/icons/unicons/cc-primary.png')}}" alt="Credit Card" class="rounded">
-              </div>
-              <div class="dropdown">
-                <button class="btn p-0" type="button" id="cardOpt1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="bx bx-dots-vertical-rounded"></i>
-                </button>
-                <div class="dropdown-menu" aria-labelledby="cardOpt1">
-                  <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                  <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                </div>
-              </div>
+            <div class="card-body">
+                <p class="card-text">{{ $category->description }}</p>
             </div>
-            <span class="fw-semibold d-block mb-1">Transactions</span>
-            <h3 class="card-title mb-2">$14,857</h3>
-            <small class="text-success fw-semibold"><i class='bx bx-up-arrow-alt'></i> +28.14%</small>
-          </div>
-        </div>
-      </div>
-      <!-- </div>
-    <div class="row"> -->
-    </div>
-  </div>
-  <div class="col-md-6 col-lg-4 order-2 mb-4">
-    <div class="card h-100">
-      <div class="card-header d-flex align-items-center justify-content-between">
-        <h5 class="card-title m-0 me-2">Transactions</h5>
-        <div class="dropdown">
-          <button class="btn p-0" type="button" id="transactionID" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="bx bx-dots-vertical-rounded"></i>
-          </button>
-          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
-            <a class="dropdown-item" href="javascript:void(0);">Last 28 Days</a>
-            <a class="dropdown-item" href="javascript:void(0);">Last Month</a>
-            <a class="dropdown-item" href="javascript:void(0);">Last Year</a>
-          </div>
-        </div>
-      </div>
-      <div class="card-body">
-        <ul class="p-0 m-0">
-          <li class="d-flex mb-4 pb-1">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="{{asset('assets/img/icons/unicons/paypal.png')}}" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                <small class="text-muted d-block mb-1">Paypal</small>
-                <h6 class="mb-0">Send money</h6>
-              </div>
-              <div class="user-progress d-flex align-items-center gap-1">
-                <h6 class="mb-0">+82.6</h6> <span class="text-muted">USD</span>
-              </div>
-            </div>
-          </li>
-          <li class="d-flex mb-4 pb-1">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="{{asset('assets/img/icons/unicons/wallet.png')}}" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                <small class="text-muted d-block mb-1">Wallet</small>
-                <h6 class="mb-0">Mac'D</h6>
-              </div>
-              <div class="user-progress d-flex align-items-center gap-1">
-                <h6 class="mb-0">+270.69</h6> <span class="text-muted">USD</span>
-              </div>
-            </div>
-          </li>
-          <li class="d-flex mb-4 pb-1">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="{{asset('assets/img/icons/unicons/chart.png')}}" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                <small class="text-muted d-block mb-1">Transfer</small>
-                <h6 class="mb-0">Refund</h6>
-              </div>
-              <div class="user-progress d-flex align-items-center gap-1">
-                <h6 class="mb-0">+637.91</h6> <span class="text-muted">USD</span>
-              </div>
-            </div>
-          </li>
-          <li class="d-flex mb-4 pb-1">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="{{asset('assets/img/icons/unicons/cc-success.png')}}" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                <small class="text-muted d-block mb-1">Credit Card</small>
-                <h6 class="mb-0">Ordered Food</h6>
-              </div>
-              <div class="user-progress d-flex align-items-center gap-1">
-                <h6 class="mb-0">-838.71</h6> <span class="text-muted">USD</span>
-              </div>
-            </div>
-          </li>
-          <li class="d-flex mb-4 pb-1">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="{{asset('assets/img/icons/unicons/wallet.png')}}" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                <small class="text-muted d-block mb-1">Wallet</small>
-                <h6 class="mb-0">Starbucks</h6>
-              </div>
-              <div class="user-progress d-flex align-items-center gap-1">
-                <h6 class="mb-0">+203.33</h6> <span class="text-muted">USD</span>
-              </div>
-            </div>
-          </li>
-          <li class="d-flex">
-            <div class="avatar flex-shrink-0 me-3">
-              <img src="{{asset('assets/img/icons/unicons/cc-warning.png')}}" alt="User" class="rounded">
-            </div>
-            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-              <div class="me-2">
-                <small class="text-muted d-block mb-1">Mastercard</small>
-                <h6 class="mb-0">Ordered Food</h6>
-              </div>
-              <div class="user-progress d-flex align-items-center gap-1">
-                <h6 class="mb-0">-92.45</h6> <span class="text-muted">USD</span>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-4">
-    <div class="card mb-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h5 class="mb-0">Add a new Service</h5>
-            <small class="text-muted float-end">Merged input group</small>
-        </div>
-        <div class="card-body">
-            <form method="POST" action="{{ route('services.store') }}">
-                @csrf
-
-                <div class="mb-3">
-                    <label class="form-label" for="title">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Service Title" required />
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description" placeholder="Service Description" required></textarea>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" for="price">Price</label>
-                    <input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="Service Price" required />
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" for="delivery_time">Delivery Time (in days)</label>
-                    <input type="number" class="form-control" id="delivery_time" name="delivery_time" placeholder="Delivery Time" required />
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label" for="category_id">Category</label>
-                    <select class="form-select" id="category_id" name="category_id" required>
-                        <option value="">Select a category</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->category_name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <input type="hidden" name="user_id" value="15" />
-
-                <button type="submit" class="btn btn-primary">Create Service</button>
-            </form>
         </div>
     </div>
+    @endforeach
 </div>
-
+  
 
 </div>
 <div class="row">
