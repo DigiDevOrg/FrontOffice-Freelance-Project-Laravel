@@ -9,15 +9,16 @@ use App\Models\Categorie;
 use App\Models\Service;
 class Analytics extends Controller
 {
-  public function index($id)
+  public function index()
   {
     $services1 = Service::all();
-
+    $id =15 ; 
     $categories = Categorie::all();
     $services = Service::where('user_id', $id)->get();
     foreach ($services as $service) {
       $name = $service->user->name;
     }
+    $name = "Ibrahim" ; 
     //if name == Undefined variable 
     if(!isset($name)){
       return view('content.Services.services-basic', compact('services1'));
