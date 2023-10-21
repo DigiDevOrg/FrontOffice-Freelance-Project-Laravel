@@ -39,9 +39,11 @@ $navbarDetached = ($navbarDetached ?? '');
        Services
       </a>
       <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-      @foreach ($categories as $category)
-        <li><a class="dropdown-item" href="#">{{ $category->name }}</a></li>
-      @endforeach
+      @isset($categories)
+        @foreach ($categories as $category)
+          <li><a class="dropdown-item" href="#">{{ $category->name }}</a></li>
+        @endforeach
+      @endisset
       </ul>
     </li>
   </ul>
