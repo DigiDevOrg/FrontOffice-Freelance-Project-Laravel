@@ -52,7 +52,7 @@
   <div class="col-md-4">
     <div class="card" style="height: 150px;">
       <div class="card-body d-flex flex-column  align-items-center">
-      <i class='bx bx-search bx-flashing' style="font-size: 3rem;"></i>
+      <a href="{{route('all-categories')}}"><i class='bx bx-search bx-flashing' style="font-size: 3rem;"></i></a>
         <p class="text-center" style="margin-top: 20px;">Browse categories to find the service you need.</p>
       </div>
     </div>

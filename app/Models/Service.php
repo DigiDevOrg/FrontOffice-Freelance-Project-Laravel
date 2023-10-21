@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
 {
-    protected $fillable = ['title', 'description', 'category_id', 'price', 'delivery_time', 'average_rating', 'image'];
+    protected $fillable = ['title', 'description', 'Category', 'price', 'delivery_time', 'average_rating', 'image'];
 
     public function user()
     {
@@ -14,5 +14,9 @@ class Service extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function attachments()
+    {
+    return $this->hasMany(Attachment::class);
     }
 }
