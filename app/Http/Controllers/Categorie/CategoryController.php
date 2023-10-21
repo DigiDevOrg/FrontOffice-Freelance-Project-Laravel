@@ -11,5 +11,5 @@ class CategoryController extends Controller
         return redirect()->route('dashboard-analytics', ['id' => 15])->with('categories', $categories);
     }
     
-    
+
 }

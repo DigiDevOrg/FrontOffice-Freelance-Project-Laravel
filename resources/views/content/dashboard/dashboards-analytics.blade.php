@@ -1,14 +1,46 @@
 @extends('layouts/contentNavbarLayout')
 
-@section('title', 'Welcome to Our Freelance Marketplace')
+<style>
+  #carousel-container {
+  position: relative;
+  text-align: center;
+}
+
+#carousel-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+  font-size: 36px; /* Adjust the font size to your preference */
+  white-space: nowrap; /* Prevent text from wrapping to a new line */
+  overflow: hidden; /* Hide any overflowing text */
+  text-overflow: ellipsis; /* Show an ellipsis (...) for very long text (optional) */
+}
+
+</style>
 
 @section('content')
-<div class="row">
-  <div class="col-md-12 welcome-section text-center text-black" style=" height: 80vh; display: flex; flex-direction: column; justify-content: center;">
-    <h1 style="font-size: 4rem; color: black;">Welcome to Our Freelance Marketplace</h1>
-    <p>Find the perfect freelance services for your project needs.</p>
+<div id="carousel-container">
+  <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img class="d-block w-100" src="{{asset('assets/img/backgrounds/R.3png.png')}}" alt="First slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="{{asset('assets/img/backgrounds/R2.jpg')}}" alt="Second slide">
+      </div>
+      <div class="carousel-item">
+        <img class="d-block w-100" src="{{asset('assets/img/backgrounds/R.3png.png')}}" alt="Third slide">
+      </div>
+    </div>
+  </div>
+  <div id="carousel-title">
+    <h2 style = "font-size: 65px; color : black;">Welcome to Our Freelance Marketplace</h2>
+    <p style = "color : black;">Find the perfect freelance services for your project needs.</p>
   </div>
 </div>
+
 
 <div class="row" style="margin-top: 30px;">
   <div class="col-md-12 text-center">
