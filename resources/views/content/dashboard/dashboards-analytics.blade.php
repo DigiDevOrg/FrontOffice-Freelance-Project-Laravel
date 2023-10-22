@@ -119,10 +119,19 @@
   </div>
 </div>
 
-<div class="row" style="margin-top: 50px;">
-  <div class="col-md-12 text-center">
-    <p>Join our freelance community today and get your project started.</p>
-    <a href="/register" class="btn btn-primary">Sign Up</a>
-  </div>
-</div>
+@if(Auth::check())
+    <div class="row" style="margin-top: 50px;">
+        <div class="col-md-12 text-center">
+            <p>Welcome, {{ Auth::user()->name }}</p>
+        </div>
+    </div>
+@else
+    <div class="row" style="margin-top: 50px;">
+        <div class="col-md-12 text-center">
+            <p>Join our freelance community today and get your project started.</p>
+            <a href="/register" class="btn btn-primary">Sign Up</a>
+        </div>
+    </div>
+@endif
+
 @endsection
