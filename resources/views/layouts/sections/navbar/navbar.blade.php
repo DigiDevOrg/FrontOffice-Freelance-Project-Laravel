@@ -14,10 +14,7 @@ $navbarDetached = ($navbarDetached ?? '');
 
   <!-- Logo -->
   <a href="{{url('/')}}" class="navbar-brand">
-    <span class="app-brand-logo demo">
-      @include('_partials.macros',["width"=>25,"withbg"=>'#696cff'])
-    </span>
-    <span class="app-brand-text demo menu-text fw-bolder">{{config('variables.templateName')}}</span>
+    <img src="{{ asset('assets/img/avatars/DigiDevLogo.png') }}" style = "width : 140px ;">
   </a>
 
   <!-- Centered Links -->

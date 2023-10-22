@@ -66,13 +66,21 @@
   <div class="col-md-6 col-lg-4 mb-3">
     <div class="card h-100">
       <!-- Replace 'img/src' and 'card-title' and 'card-text' with actual fields from your Service model -->
-      <img class="card-img-top" src="{{asset('assets/img/elements/2.jpg')}}" alt="Card image cap"  height="200" width="200"/>
+      <img class="card-img-top" src="{{asset('assets/img/elements/2.jpg')}}" alt="Card image cap" height="200" width="200" />
       <div class="card-body">
         <h5 class="card-title">{{ $service->title }}</h5>
         <p class="card-text">{{ $service->description }}</p>
         <p class="card-text">{{ $service->price }}</p>
         <p class="card-text">{{ $service->average_rating }}</p>
         <p class="card-text">{{ $service->user_name }}</p>
+
+        <div class="skills-container d-flex flex-wrap">
+          @foreach($skills as $skill)
+            <span class="badge bg-primary me-1 mb-1">{{ $skill->skillName }}</span>
+          @endforeach
+        </div>
+        <br/>
+        <br/>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalScrollable">
           Option 2
         </button>
@@ -81,6 +89,8 @@
   </div>
   @endforeach
 </div>
+
+
 <!-- Examples -->
 
 <!-- Other content types can be added here -->
