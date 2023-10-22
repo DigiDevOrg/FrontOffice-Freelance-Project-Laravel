@@ -4,6 +4,7 @@ namespace App\Http\Controllers\services;
 
 use App\Http\Controllers\Controller;
 use App\Models\Service;
+use App\Models\Skills;
 
 class Services extends Controller
 {
@@ -17,8 +18,9 @@ class Services extends Controller
     public function getServiceByIdCategorie($idCategorie)
     {
         $services = Service::where('Category', $idCategorie)->get();
+        $skills = Skills::where('category_id', $idCategorie)->get();
 
-        return view('content.Services.services-basic', compact('services'));
+        return view('content.Services.services-basic', compact('services' , 'skills'));
     }
 
     public function getServiceById($id)
