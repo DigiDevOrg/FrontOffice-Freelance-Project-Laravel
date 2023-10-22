@@ -100,11 +100,7 @@
                         <p class="card-text">{{ $service->average_rating }}</p>
                         <p class="card-text">{{ $service->user_name }}</p>
 
-                        <div class="skills-container d-flex flex-wrap">
-                            @foreach ($skills as $skill)
-                                <span class="badge bg-primary me-1 mb-1">{{ $skill->skillName }}</span>
-                            @endforeach
-                        </div>
+                        
                         <br />
                         <br />
                         <div class="modal fade" id="modalScrollable-{{ $service->id }}" tabindex="-1" aria-hidden="true">
@@ -150,7 +146,11 @@
                                                 <h4>Freelancer Details:</h4>
                                                 <p>Freelancer Name: {{ $service->user->name }}</p>
                                                 <p>Email: {{ $service->user->email }}</p>
-                                                
+                                                <div class="skills-container d-flex flex-wrap">
+                                                  @foreach ($skills as $skill)
+                                                      <span class="badge bg-primary me-1 mb-1">{{ $skill->skillName }}</span>
+                                                  @endforeach
+                                              </div>
                                             </div>
                                         </div>
                                     </div>
