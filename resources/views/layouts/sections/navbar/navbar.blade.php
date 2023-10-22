@@ -38,7 +38,7 @@ $navbarDetached = ($navbarDetached ?? '');
       <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
       @isset($categories)
         @foreach ($categories as $category)
-          <li><a class="dropdown-item" href="#">{{ $category->name }}</a></li>
+          <li><a class="dropdown-item" href="#">{{ $category->description }}</a></li>
         @endforeach
       @endisset
       </ul>

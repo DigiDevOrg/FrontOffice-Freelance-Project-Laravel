@@ -20,7 +20,7 @@ class Services extends Controller
         $services = Service::where('Category', $idCategorie)->get();
         $skills = Skills::where('category_id', $idCategorie)->get();
 
-        return view('content.Services.services-basic', compact('services' , 'skills'));
+        return view('content.Services.services-basic', compact('services', 'skills'));
     }
 
     public function getServiceById($id)
