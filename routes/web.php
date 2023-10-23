@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ReviewsRepliesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -95,6 +97,14 @@ Route::get('/categories', $controller_path.'\Categorie\CategoryController@index'
 Route::resource('posts', PostController::class);
 Route::resource('comments', CommentController::class)->only(['edit', 'update', 'destroy']);
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+
+//reviews 
+Route::resource("reviews", ReviewController::class);
+
+Route::get('myReview', [ReviewController::class, 'read'])->name('reviews.read');
+Route::resource('reviewsReplies', ReviewsRepliesController::class)->only(['edit', 'update', 'destroy']);
+Route::post('/reviewsReplies', [ReviewsRepliesController::class, 'store'])->name('reviewsReplies.store');
+
 
 Route::middleware([
     'auth:sanctum',
