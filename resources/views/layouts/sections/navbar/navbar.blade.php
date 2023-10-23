@@ -54,7 +54,7 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 @isset($categories)
                     @foreach ($categories as $category)
-                        <li><a class="dropdown-item" href="{{ route('services-by-category', $category) }}">{{ $category->description }}</a></li>
+                        <li><a class="dropdown-item" href="{{ route('services-by-category', $category) }}">{{ $category->name }}</a></li>
                     @endforeach
                 @endisset
             </ul>
