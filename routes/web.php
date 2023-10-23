@@ -94,7 +94,7 @@ Route::get('/categories', $controller_path.'\Categorie\CategoryController@index'
 // posts and comments
 Route::resource('posts', PostController::class);
 Route::resource('comments', CommentController::class)->only(['edit', 'update', 'destroy']);
-// Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 
 Route::middleware([
     'auth:sanctum',
