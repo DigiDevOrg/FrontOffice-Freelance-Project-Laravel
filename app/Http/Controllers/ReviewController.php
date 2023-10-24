@@ -29,7 +29,7 @@ namespace App\Http\Controllers;
         {
             /// 1. La validation
             $this->validate($request, [
-                'rating' => 'bail|required|int|max:255',
+                'rating' => 'bail|required|int|max:5|min:1',
                 "comment" => 'bail|required',
             ]);
         
@@ -38,11 +38,12 @@ namespace App\Http\Controllers;
             $review = new Review([
                 "rating" => $request->rating,
                 "comment" => $request->comment,
+                
+                "freelancerId" => $request->freelancerId,
             ]);
         
             // Associate the post with the currently authenticated user
             $review->author_id = auth()->id();
-            $review->setAttribute('freelancerId', 2);
             $review->save();
         
             // 4. On retourne vers tous les posts : route("posts.index")

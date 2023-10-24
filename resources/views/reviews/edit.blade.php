@@ -22,6 +22,7 @@
 <!-- Le token CSRF -->
 @csrf
 
+
 <p>
     <label for="rating">Rating</label><br/>
 
@@ -41,6 +42,16 @@
     <div>{{ $message }}</div>
     @enderror
 </p>
+<p>
+    <label for="freelancerId">Freelancer</label><br/>
+
+    <input type="number" name="freelancerId" class="form-control" id="freelancerId" value="{{ isset($review->freelancerId) ? $review->freelancerId : old('freelancerId') }}" placeholder="freelancer " >
+
+    @error("freelancerId")
+    <div>{{ $message }}</div>
+    @enderror
+</p>
+
 
 <input type="submit" class="btn btn-primary" name="valider" value="Valider">
 
