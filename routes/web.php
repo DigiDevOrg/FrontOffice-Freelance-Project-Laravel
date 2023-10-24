@@ -3,6 +3,10 @@
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\MessageController;
+
+
 use App\Http\Controllers\ReviewsRepliesController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +44,13 @@ Route::get('/pages/misc-under-maintenance', $controller_path.'\pages\MiscUnderMa
 Route::get('/auth/login-basic', $controller_path.'\authentications\LoginBasic@index')->name('auth-login-basic');
 Route::get('/auth/register-basic', $controller_path.'\authentications\RegisterBasic@index')->name('auth-register-basic');
 Route::get('/auth/forgot-password-basic', $controller_path.'\authentications\ForgotPasswordBasic@index')->name('auth-reset-password-basic');
+
+//order
+Route::post('/addOrder', [OrderController::class, 'store'])->name('add-order');
+Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+Route::delete('/orders/delete/{id}', [OrderController::class, 'destroy'])->name('orders.destroy');
+//messages
+  Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
 
 // services
 Route::get('/services', $controller_path.'\services\Services@index')->name('services');
@@ -98,7 +109,7 @@ Route::resource('posts', PostController::class);
 Route::resource('comments', CommentController::class)->only(['edit', 'update', 'destroy']);
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 
-//reviews 
+//reviews
 Route::resource("reviews", ReviewController::class);
 
 Route::get('myReview', [ReviewController::class, 'read'])->name('reviews.read');

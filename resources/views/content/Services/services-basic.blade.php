@@ -100,7 +100,7 @@
                         <p class="card-text">{{ $service->average_rating }}</p>
                         <p class="card-text">{{ $service->user_name }}</p>
 
-                        
+
                         <br />
                         <br />
                         <div class="modal fade" id="modalScrollable-{{ $service->id }}" tabindex="-1" aria-hidden="true">
@@ -154,10 +154,20 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-secondary"
                                             data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Place An order </button>
+                                            <form method="POST" action="{{route('add-order')}}">
+    @csrf
+    <input type="hidden" name="service_id" value="{{$service->id}}">
+    <input type="hidden" name="seller_id" value="{{$service->user->id}}">
+    <input type="hidden" name="buyer_id" >
+    <input type="hidden" name="order_date" value="{{ date('Y-m-d') }}">
+    <input type="hidden" name="order_status" value="pending">
+    <button type="submit" class="btn btn-primary">Place An order </button>
+</form>
+
                                     </div>
                                 </div>
 
