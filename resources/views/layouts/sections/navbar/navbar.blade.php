@@ -45,8 +45,9 @@
             <a class="nav-link" href="#">Blogs</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Blogs</a>
-        </li>
+    <a class="nav-link" href="{{ route('reviews.index') }}">Reviews</a>
+</li>
+
         <li class="nav-item dropdown"> <!-- This is a dropdown -->
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown">
                 Services

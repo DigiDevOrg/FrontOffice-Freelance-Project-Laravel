@@ -2,14 +2,14 @@
 @section("rating", $review->rating)
 @section("content")
 
-	<h1>Rating :{{  $review->rating }}</h1>
-
-	
-	<div>Comment  : {{ $review->comment }}</div>
-    <div>Freelancer: {{ $review->freelancer->name }}</div>
-
-    <div>Author: {{ $review->author->name }}</div>
-
+<div class="card m-2" style="width: 80rem;">
+        <div class="card-body">
+        <h4 class="card-title">rating          : {{ $review->rating }}</h4>
+			
+			<h4 class="card-title">Comment       :{{ $review->comment }}</h4>
+			<h4 class="card-title">Freelancer    : {{ $review->freelancer->name }}</h4>
+		    <h4 class="card-title">Author         : {{ $review->author->name }}</h4>
+</div></div>
 	<p><a href="{{ route('reviews.index') }}" title="Retourner aux articles" >Retourner aux reviews</a></p>
 	
     <h2>Comments</h2>

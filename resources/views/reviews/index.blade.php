@@ -15,21 +15,33 @@
 			
 		</thead>
 		<tbody>
+		@php
+    $classNames = [ 'bg-info'];
+    shuffle($classNames);
+    $classNamesCount = count($classNames);
+    @endphp
+
 			<!-- On parcourt la collection de Post -->
 			@foreach ($reviews as $review)
-			<div class="card m-2" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">rating : {{ $review->rating }}</h5>
+			@php
+    $cssClass = $classNames[array_rand($classNames)]; 
+    @endphp
+	<div class="col-md-6 col-xl-6">
+        <div class="col-12 col-md-6 col-lg-6">
+            <div class="card m-2" style="width: 88rem;">
+                <div class="card-body">
+            <h4 class="card-title" >rating : {{ $review->rating }}</h4>
 			
-			<h4 class="card-title">Comment  :{{ $review->comment }}</h4>
-			<h4 class="card-title">Freelancer: {{ $review->freelancerId }}</h4>
-		    <h4 class="card-title">Author: {{ $review->author->name }}</h4>
+			<h4 class="card-title" >Comment  :{{ $review->comment }}</h4>
+			<h4 class="card-title" >Freelancer: {{ $review->freelancer->name }}</h4>
+		    <h4 class="card-title" >Author: {{ $review->author->name }}</h4>
+			</div>
+			<a href="{{ route('reviews.show', $review) }}" >learn more </a>
 			
-			<a href="{{ route('reviews.show', $review) }}" class="btn btn-secondary">learn more </a>
-			<div></div>
+
 			@auth
                 @if (auth()->user()->id === $review->author_id)
-				<h7>it's your reviews  </h7>
+				<h7>you are the author of this review   </h7>
                    
                     <form method="POST" action="{{ route('reviews.destroy', $review) }}">
                         @csrf
@@ -40,6 +52,7 @@
             @endauth
 		</div>
     </div>
+	</div>
 			@endforeach
 		</tbody>
 	</table>
